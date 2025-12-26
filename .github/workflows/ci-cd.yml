@@ -47,8 +47,8 @@ jobs:
       - name: Deploy using Octopus
         run: |
           octo create-release \
-            --project "Your-Octopus-Project-Name" \
-            --deployTo "Dev" \
+            --project "k8s-poc" \
+            --deployTo "development" \
             --server ${{ secrets.OCTOPUS_URL }} \
             --apiKey ${{ secrets.OCTOPUS_API_KEY }} \
             --variable "Frontend.Image.Tag=${{ steps.tag.outputs.TAG }}" \
