@@ -44,12 +44,37 @@ jobs:
       - name: Install Octopus CLI
         uses: OctopusDeploy/install-octopus-cli-action@v3
 
-      - name: Deploy using Octopus
-        run: |
-          octo create-release \
-            --project "poc_k8s" \
-            --deployTo "development" \
-            --server ${{ secrets.OCTOPUS_URL }} \
-            --apiKey ${{ secrets.OCTOPUS_API_KEY }} \
-            --variable "Frontend.Image.Tag=${{ steps.tag.outputs.TAG }}" \
-            --variable "Backend.Image.Tag=${{ steps.tag.outputs.TAG }}"
+      # - name: Deploy using Octopus
+      #   run: |
+      #     octo create-release \
+      #       --project "poc_k8s" \
+      #       --deployTo "development" \
+      #       --server ${{ secrets.OCTOPUS_URL }} \
+      #       --apiKey ${{ secrets.OCTOPUS_API_KEY }} \
+      #       --variable "Frontend.Image.Tag=${{ steps.tag.outputs.TAG }}" \
+      #       --variable "Backend.Image.Tag=${{ steps.tag.outputs.TAG }}"
+      - name: Login to Octopus
+        uses: OctopusDeploy/login@v1
+        with:
+          server: ${{ secrets.OCTOPUS_URL }}
+          api_key: ${{ secrets.OCTOPUS_API_KEY }}
+
+      # Create Octopus Release
+      - name: Create Release
+        id: create_release
+        uses: OctopusDeploy/create-release-action@v3
+        with:
+          project: poc_k8s
+          space: Default
+          variables: |
+            Frontend.Image.Tag=${{ steps.tag.outputs.TAG }}
+            Backend.Image.Tag=${{ steps.tag.outputs.TAG }}
+
+      # Deploy Release to Kubernetes
+      - name: Deploy Release
+        uses: OctopusDeploy/deploy-release-action@v3
+        with:
+          project: poc_k8s
+          space: Default
+          release_number: ${{ steps.create_release.outputs.release_number }}
+          environments: development
