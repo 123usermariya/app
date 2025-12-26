@@ -47,7 +47,7 @@ jobs:
       - name: Deploy using Octopus
         run: |
           octo create-release \
-            --project "k8s-poc" \
+            --project "poc_k8s" \
             --deployTo "development" \
             --server ${{ secrets.OCTOPUS_URL }} \
             --apiKey ${{ secrets.OCTOPUS_API_KEY }} \
