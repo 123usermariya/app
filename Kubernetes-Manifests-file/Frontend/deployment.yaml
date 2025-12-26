@@ -24,7 +24,7 @@ spec:
       # - name: my-ecr-secret
       containers:
       - name: frontend
-        image: sajli/three-tier-frontend:latest
+        image: sajli/three-tier-frontend:#{Frontend.Image.Tag}
         imagePullPolicy: Always
         env:
           - name: REACT_APP_BACKEND_URL
