@@ -27,7 +27,9 @@ jobs:
           pwd
           ls
           cd Application-Code/frontend/
-          docker build -t sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }} -f Application-Code/frontend/
+          ls
+          pwd
+          docker build -t sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }} frontend
           docker push sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }}
 
       - name: Build & Push Backend
