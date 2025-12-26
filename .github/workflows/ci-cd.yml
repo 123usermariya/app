@@ -24,13 +24,15 @@ jobs:
 
       - name: Build & Push Frontend
         run: |
-          docker build -t mydockerhub/frontend:${{ steps.tag.outputs.TAG }} frontend
-          docker push mydockerhub/frontend:${{ steps.tag.outputs.TAG }}
+          cd Application-Code/frontend
+          docker build -t sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }} frontend
+          docker push sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }}
 
       - name: Build & Push Backend
         run: |
-          docker build -t mydockerhub/backend:${{ steps.tag.outputs.TAG }} backend
-          docker push mydockerhub/backend:${{ steps.tag.outputs.TAG }}
+          cd Application-Code/backend
+          docker build -t sajli/three-tier-backend:${{ steps.tag.outputs.TAG }} backend
+          docker push sajli/three-tier-backend:${{ steps.tag.outputs.TAG }}
 
       - name: Install Octopus CLI
         uses: OctopusDeploy/install-octopus-cli-action@v3
