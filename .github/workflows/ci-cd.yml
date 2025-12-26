@@ -24,13 +24,15 @@ jobs:
 
       - name: Build & Push Frontend
         run: |
-          cd Application-Code/frontend
+          pwd
+          cd Application-Code/frontend/
           docker build -t sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }} frontend
           docker push sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }}
 
       - name: Build & Push Backend
         run: |
-          cd Application-Code/backend
+          pwd
+          cd Application-Code/backend/
           docker build -t sajli/three-tier-backend:${{ steps.tag.outputs.TAG }} backend
           docker push sajli/three-tier-backend:${{ steps.tag.outputs.TAG }}
 
