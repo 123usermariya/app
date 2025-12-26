@@ -29,14 +29,16 @@ jobs:
           cd Application-Code/frontend/
           ls
           pwd
-          docker build -t sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }} frontend
+          docker build -t sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }} .
           docker push sajli/three-tier-frontend:${{ steps.tag.outputs.TAG }}
 
       - name: Build & Push Backend
         run: |
           pwd
           cd Application-Code/backend/
-          docker build -t sajli/three-tier-backend:${{ steps.tag.outputs.TAG }} backend
+          ls
+          pwd
+          docker build -t sajli/three-tier-backend:${{ steps.tag.outputs.TAG }} .
           docker push sajli/three-tier-backend:${{ steps.tag.outputs.TAG }}
 
       - name: Install Octopus CLI
