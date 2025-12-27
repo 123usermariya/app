@@ -34,7 +34,7 @@ jobs:
           cd Application-Code/backend/
           ls
           pwd
-          docker build -t sajli/three-tier-backend:lates .
+          docker build -t sajli/three-tier-backend:latest .
           docker push sajli/three-tier-backend:latest
 
       # - name: Install Octopus CLI
