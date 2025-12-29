@@ -24,7 +24,7 @@ spec:
       # - name: my-ecr-secret
       containers:
       - name: api
-        image: sajli/three-tier-backend:latest
+        image: "sajli/three-tier-backend:#{Backend.Image.Tag}"
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
